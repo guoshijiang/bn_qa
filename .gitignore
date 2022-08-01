@@ -1,0 +1,11 @@
+.idea
+optimism
+bitnetwork
+
+SplitDemo/envs/geth.env
+SplitDemo/envs/dtl.env
+SplitDemo/envs/batch-submitter.env
+SplitDemo/envs/intergration.env
+
+DepositDemo/node_modules
+DepositDemo/yarn.lock
