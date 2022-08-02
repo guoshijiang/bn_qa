@@ -1,15 +1,9 @@
 const ethers = require('ethers')
 const chalk = require('chalk')
 const optimismSDK = require("@eth-optimism/sdk")
+import { loadContract } from '@eth-optimism/contracts'
 require('dotenv').config()
 
-const loadContract = (
-        name: string,
-    address: string,
-    provider: BaseProvider
-): Contract => {
-  return new Contract(address, getContractInterface(name) as any, provider)
-}
 
 
 const main = async () => {
