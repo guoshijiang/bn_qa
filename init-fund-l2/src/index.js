@@ -35,6 +35,10 @@ const main = async () => {
 
   const network = await L1Provider.getNetwork()
   const network2 = await L2Provider.getNetwork()
+
+  console.log(network.chainId)
+  console.log(network2.chainId)
+
   const messenger = new optimismSDK.CrossChainMessenger({
     l1SignerOrProvider: L1Wallet,
     l2SignerOrProvider: L2Wallet,
