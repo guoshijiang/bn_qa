@@ -49,8 +49,6 @@ const setup = async() => {
   crossChainMessenger = new optimismSDK.CrossChainMessenger({
     l1SignerOrProvider: l1Signer,
     l2SignerOrProvider: l2Signer,
-    l1ChainId: 4,
-    l2ChainId: 1705003,
     contracts: {
       l1: {
         AddressManager: process.env.ADDRESS_MANAGER,
@@ -102,9 +100,6 @@ const reportERC20Balances = async () => {
 }    // reportERC20Balances
 
 
-
-
-
 const depositETH = async () => {
 
   console.log("Before Deposit ETH")
@@ -118,7 +113,6 @@ const depositETH = async () => {
   // console.log(crossChainMessenger.contracts.l1.AddressManager)
   console.log("wenbin print end")
 
-
   const response = await crossChainMessenger.depositETH(gwei)
   console.log(`Transaction hash (on L1): ${response.hash}`)
   await response.wait()
@@ -127,107 +121,16 @@ const depositETH = async () => {
   await crossChainMessenger.waitForMessageStatus(response.hash,
                                                   optimismSDK.MessageStatus.RELAYED)
 
-
-  console.log("After Deposit 1 ETH")
+  console.log("After Deposit 1 gwei")
   await reportBalances()
   console.log(`depositETH took ${(new Date()-start)/1000} seconds\n\n`)
 }     // depositETH()
 
 
-
-const depositERC20 = async () => {
-
-  console.log("Deposit ERC20")
-  await reportERC20Balances()
-  const start = new Date()
-
-  // Need the l2 address to know which bridge is responsible
-  const allowanceResponse = await crossChainMessenger.approveERC20(
-    daiAddrs.l1Addr, daiAddrs.l2Addr, dai)
-  await allowanceResponse.wait()
-  console.log(`Allowance given by tx ${allowanceResponse.hash}`)
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-
-  const response = await crossChainMessenger.depositERC20(
-    daiAddrs.l1Addr, daiAddrs.l2Addr, dai)
-  console.log(`Deposit transaction hash (on L1): ${response.hash}`)
-  await response.wait()
-  console.log("Waiting for status to change to RELAYED")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.waitForMessageStatus(response.hash,
-                                                  optimismSDK.MessageStatus.RELAYED)
-
-  await reportERC20Balances()
-  console.log(`depositERC20 took ${(new Date()-start)/1000} seconds\n\n`)
-}     // depositETH()
-
-const withdrawERC20 = async () => {
-
-  console.log("Withdraw ERC20")
-  const start = new Date()
-  await reportERC20Balances()
-
-  const response = await crossChainMessenger.withdrawERC20(
-    daiAddrs.l1Addr, daiAddrs.l2Addr, dai)
-  console.log(`Transaction hash (on L2): ${response.hash}`)
-  await response.wait()
-
-  console.log("Waiting for status to change to IN_CHALLENGE_PERIOD")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.waitForMessageStatus(response.hash,
-    optimismSDK.MessageStatus.IN_CHALLENGE_PERIOD)
-  console.log("In the challenge period, waiting for status READY_FOR_RELAY")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.waitForMessageStatus(response.hash,
-                                                optimismSDK.MessageStatus.READY_FOR_RELAY)
-  console.log("Ready for relay, finalizing message now")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.finalizeMessage(response)
-  console.log("Waiting for status to change to RELAYED")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.waitForMessageStatus(response,
-    optimismSDK.MessageStatus.RELAYED)
-  await reportERC20Balances()
-  console.log(`withdrawERC20 took ${(new Date()-start)/1000} seconds\n\n\n`)
-}     // withdrawERC20()
-
-const withdrawETH = async () => {
-
-  console.log("Withdraw ETH")
-  const start = new Date()
-  await reportBalances()
-
-  const response = await crossChainMessenger.withdrawETH(centieth)
-  console.log(`Transaction hash (on L2): ${response.hash}`)
-  await response.wait()
-
-  console.log("Waiting for status to change to IN_CHALLENGE_PERIOD")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.waitForMessageStatus(response.hash,
-    optimismSDK.MessageStatus.IN_CHALLENGE_PERIOD)
-  console.log("In the challenge period, waiting for status READY_FOR_RELAY")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.waitForMessageStatus(response.hash,
-                                                optimismSDK.MessageStatus.READY_FOR_RELAY)
-  console.log("Ready for relay, finalizing message now")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.finalizeMessage(response)
-  console.log("Waiting for status to change to RELAYED")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.waitForMessageStatus(response,
-    optimismSDK.MessageStatus.RELAYED)
-  await reportBalances()
-  console.log(`withdrawETH took ${(new Date()-start)/1000} seconds\n\n\n`)
-}     // withdrawETH()
-
-
 const main = async () => {
     await setup()
     await depositETH()
-
 }  // main
-
-
 
 main().then(() => process.exit(0))
   .catch((error) => {
