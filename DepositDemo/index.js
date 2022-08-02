@@ -39,12 +39,31 @@ const getSigners = async () => {
 const setup = async() => {
   const [l1Signer, l2Signer] = await getSigners()
   addr = l1Signer.address
-  crossChainMessenger = new optimismSDK.CrossChainMessenger({
-      l1ChainId: 4,   // For Kovan, it's 1 for Mainnet
-      l2ChainId: 1705003,
-      l1SignerOrProvider: l1Signer,
-      l2SignerOrProvider: l2Signer
+  // crossChainMessenger = new optimismSDK.CrossChainMessenger({
+  //     l1ChainId: 4,   // For Kovan, it's 1 for Mainnet
+  //     l2ChainId: 1705003,
+  //     l1SignerOrProvider: l1Signer,
+  //     l2SignerOrProvider: l2Signer
+  // })
+
+  const messenger = new CrossChainMessenger({
+    l1SignerOrProvider: l1Signer,
+    l2SignerOrProvider: l2Signer,
+    l1ChainId: 4,
+    l2ChainId: 1705003,
+    contracts: {
+      l1: {
+        AddressManager: process.env.ADDRESS_MANAGER,
+        L1CrossDomainMessenger: process.env.L1_CROSS_DOMAIN_MESSENGER,
+        L1StandardBridge: process.env.L1_STANDARD_BRIDGE,
+        StateCommitmentChain: process.env.STATE_COMMITMENT_CHAIN,
+        CanonicalTransactionChain: process.env.CANONICAL_TRANSACTION_CHAIN,
+        BondManager: process.env.BOND_MANAGER,
+      },
+    },
   })
+
+
   l1ERC20 = new ethers.Contract(daiAddrs.l1Addr, erc20ABI, l1Signer)
   l2ERC20 = new ethers.Contract(daiAddrs.l2Addr, erc20ABI, l2Signer)
 }    // setup
