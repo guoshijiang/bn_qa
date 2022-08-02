@@ -46,7 +46,7 @@ const setup = async() => {
   //     l2SignerOrProvider: l2Signer
   // })
 
-  const messenger = new CrossChainMessenger({
+  crossChainMessenger = new optimismSDK.CrossChainMessenger({
     l1SignerOrProvider: l1Signer,
     l2SignerOrProvider: l2Signer,
     l1ChainId: 4,
