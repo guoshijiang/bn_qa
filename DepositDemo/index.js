@@ -49,6 +49,8 @@ const setup = async() => {
   crossChainMessenger = new optimismSDK.CrossChainMessenger({
     l1SignerOrProvider: l1Signer,
     l2SignerOrProvider: l2Signer,
+    l1ChainId: 4,
+    l2ChainId: 1705003,
     contracts: {
       l1: {
         AddressManager: process.env.ADDRESS_MANAGER,
