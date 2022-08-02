@@ -111,7 +111,8 @@ const depositETH = async () => {
   await reportBalances()
   const start = new Date()
 
-  console.log(crossChainMessenger.l1.AddressManager)
+  console.log(crossChainMessenger)
+  console.log(crossChainMessenger.contracts.l1.AddressManager)
 
   const response = await crossChainMessenger.depositETH(gwei)
   console.log(`Transaction hash (on L1): ${response.hash}`)
