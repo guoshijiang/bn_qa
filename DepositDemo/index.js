@@ -112,7 +112,8 @@ const depositETH = async () => {
   const start = new Date()
 
   console.log("wenbin print begin")
-  console.log(crossChainMessenger.contracts.l1.AddressManager)
+  console.log(process.env.ADDRESS_MANAGER)
+  // console.log(crossChainMessenger.contracts.l1.AddressManager)
   console.log("wenbin print end")
 
 
