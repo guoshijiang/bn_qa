@@ -1,8 +1,16 @@
 const ethers = require('ethers')
 const chalk = require('chalk')
-const { CrossChainMessenger } = require('../../../packages/sdk')
-const { loadContract } = require('../../../packages/contracts/dist/index.js')
+const optimismSDK = require("@eth-optimism/sdk")
 require('dotenv').config()
+
+export const loadContract = (
+        name: string,
+    address: string,
+    provider: BaseProvider
+): Contract => {
+  return new Contract(address, getContractInterface(name) as any, provider)
+}
+
 
 const main = async () => {
   const env = process.env
@@ -27,7 +35,7 @@ const main = async () => {
   const L2Wallet = new ethers.Wallet(PRIVATE_KEY).connect(L2Provider)
 
   const network = await L1Provider.getNetwork()
-  const messenger = new CrossChainMessenger({
+  const messenger = new optimismSDK.CrossChainMessenger({
     l1SignerOrProvider: L1Wallet,
     l2SignerOrProvider: L2Wallet,
     l1ChainId: network.chainId,
