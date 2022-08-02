@@ -28,6 +28,11 @@ const main = async () => {
   const L1Wallet = new ethers.Wallet(PRIVATE_KEY).connect(L1Provider)
   const L2Wallet = new ethers.Wallet(PRIVATE_KEY).connect(L2Provider)
 
+  console.log("wenbin test begin==============")
+  console.log(L1_NODE_WEB3_URL)
+  console.log(L2_NODE_WEB3_URL)
+  console.log("wenbin test end  ==============")
+
   const network = await L1Provider.getNetwork()
   const messenger = new optimismSDK.CrossChainMessenger({
     l1SignerOrProvider: L1Wallet,
