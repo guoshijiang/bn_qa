@@ -34,10 +34,12 @@ const main = async () => {
   console.log("wenbin test end  ==============")
 
   const network = await L1Provider.getNetwork()
+  const network2 = await L2Provider.getNetwork()
   const messenger = new optimismSDK.CrossChainMessenger({
     l1SignerOrProvider: L1Wallet,
     l2SignerOrProvider: L2Wallet,
     l1ChainId: network.chainId,
+    l2ChainId: network2.chainId
     fastRelayer: false,
   })
   console.log("wenbin timepoint 1------------------")
