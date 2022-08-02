@@ -1,7 +1,7 @@
 const ethers = require('ethers')
 const chalk = require('chalk')
 const optimismSDK = require("@eth-optimism/sdk")
-import { loadContract } from '@eth-optimism/contracts'
+const loadContract =  require("@eth-optimism/contracts")
 require('dotenv').config()
 
 
