@@ -40,12 +40,15 @@ const main = async () => {
     l1ChainId: network.chainId,
     fastRelayer: false,
   })
+  console.log("wenbin timepoint 1------------------")
 
   const Lib_AddressManager = loadContract(
     'Lib_AddressManager',
     ADDRESS_MANAGER_ADDRESS,
     L1Provider
   )
+
+  console.log("wenbin timepoint 2------------------")
 
   const Proxy__L1CrossDomainMessengerAddress =
     await Lib_AddressManager.getAddress('Proxy__L1CrossDomainMessenger')
@@ -70,6 +73,7 @@ const main = async () => {
       Proxy__L1StandardBridgeAddress
     )}`
   )
+  console.log("wenbin timepoint 3------------------")
 
   const Proxy__L1StandardBridge = loadContract(
     'L1StandardBridge',
