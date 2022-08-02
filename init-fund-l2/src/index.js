@@ -39,7 +39,7 @@ const main = async () => {
     l1SignerOrProvider: L1Wallet,
     l2SignerOrProvider: L2Wallet,
     l1ChainId: network.chainId,
-    l2ChainId: network2.chainId
+    l2ChainId: network2.chainId,
     fastRelayer: false,
   })
   console.log("wenbin timepoint 1------------------")
