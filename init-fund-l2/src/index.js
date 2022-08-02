@@ -3,7 +3,7 @@ const chalk = require('chalk')
 const optimismSDK = require("@eth-optimism/sdk")
 require('dotenv').config()
 
-export const loadContract = (
+const loadContract = (
         name: string,
     address: string,
     provider: BaseProvider
