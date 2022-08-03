@@ -98,7 +98,7 @@ const depositETH = async () => {
   // console.log(crossChainMessenger.contracts.l1.AddressManager)
   console.log("wenbin print end")
 
-  const response = await crossChainMessenger.depositETH(gwei)
+  const response = await crossChainMessenger.depositETH(eth)
   console.log(`Transaction hash (on L1): ${response.hash}`)
   await response.wait()
   console.log("Waiting for status to change to RELAYED")
