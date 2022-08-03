@@ -96,10 +96,12 @@ const depositETH = async () => {
   await response.wait()
   console.log("Waiting for status to change to RELAYED")
   console.log(`Time so far ${(new Date()-start)/1000} seconds`)
+  console.log("response hash:"+ response.hash)
   await crossChainMessenger.waitForMessageStatus(response.hash,
                                                   optimismSDK.MessageStatus.RELAYED)
 
-  console.log("After Deposit 1 gwei")
+
+  console.log("After Deposit 1 deth")
   await reportBalances()
   console.log(`depositETH took ${(new Date()-start)/1000} seconds\n\n`)
 }     // depositETH()
