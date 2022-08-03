@@ -3,10 +3,10 @@
 // Transfers between L1 and L2 using the Optimism SDK
 
 const ethers = require("ethers")
-const optimismSDK = require("@eth-optimism/sdk")
+const optimismSDK = require("@bradyjoestar/sdk")
 require('dotenv').config()
 
-const network = "rinkeby"
+const network = "ropsten"
 
 const l1Url = process.env.TEST_URL
 const l2Url = process.env.OPTI_TEST_URL
