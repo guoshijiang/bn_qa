@@ -40,7 +40,7 @@ const setup = async() => {
   const [l1Signer, l2Signer] = await getSigners()
   addr = l1Signer.address
   crossChainMessenger = new optimismSDK.CrossChainMessenger({
-      l1ChainId: 4,   // For Kovan, it's 1 for Mainnet
+      l1ChainId: 3,   // For Kovan, it's 1 for Mainnet
       l2ChainId: 1705003,
       l1SignerOrProvider: l1Signer,
       l2SignerOrProvider: l2Signer
@@ -87,7 +87,7 @@ const reportERC20Balances = async () => {
 
 const depositETH = async () => {
 
-  console.log("Before Deposit ETH")
+  console.log("Before Deposit DETH")
   await reportBalances()
   const start = new Date()
 
@@ -97,14 +97,12 @@ const depositETH = async () => {
   console.log("Waiting for status to change to RELAYED")
   console.log(`Time so far ${(new Date()-start)/1000} seconds`)
   console.log("response hash:"+ response.hash)
-  await crossChainMessenger.waitForMessageStatus(response.hash,
-                                                  optimismSDK.MessageStatus.RELAYED)
-
+  await crossChainMessenger.waitForMessageStatus(response.hash,optimismSDK.MessageStatus.RELAYED)
 
   console.log("After Deposit 1 deth")
   await reportBalances()
   console.log(`depositETH took ${(new Date()-start)/1000} seconds\n\n`)
-}     // depositETH()
+}
 
 
 const main = async () => {
