@@ -61,4 +61,5 @@ RUN yarn build
 FROM base as deployer
 WORKDIR /opt/optimism/packages/contracts
 COPY ./ops/scripts/deployer.sh .
+COPY ./ops/scripts/redeployer.sh .
 CMD ["yarn", "run", "deploy"]
