@@ -65,6 +65,7 @@ const erc20ABI = [
 const gwei = 1000000000n
 const eth = gwei * gwei   // 10^18
 const centieth = eth/100n
+const deth = eth/10n
 const dai = eth
 
 
@@ -90,7 +91,7 @@ const depositETH = async () => {
   await reportBalances()
   const start = new Date()
 
-  const response = await crossChainMessenger.depositETH(eth)
+  const response = await crossChainMessenger.depositETH(deth)
   console.log(`Transaction hash (on L1): ${response.hash}`)
   await response.wait()
   console.log("Waiting for status to change to RELAYED")
