@@ -45,6 +45,7 @@ const setup = async() => {
       l1SignerOrProvider: l1Signer,
       l2SignerOrProvider: l2Signer
   })
+  console.log(crossChainMessenger.contracts.l1.AddressManager)
 
   l1ERC20 = new ethers.Contract(daiAddrs.l1Addr, erc20ABI, l1Signer)
   l2ERC20 = new ethers.Contract(daiAddrs.l2Addr, erc20ABI, l2Signer)
