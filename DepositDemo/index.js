@@ -6,7 +6,7 @@ const ethers = require("ethers")
 const optimismSDK = require("@bradyjoestar/sdk")
 require('dotenv').config()
 
-const network = "ropsten"
+const network = "gorelibn"
 
 const l1Url = process.env.TEST_URL
 const l2Url = process.env.OPTI_TEST_URL
