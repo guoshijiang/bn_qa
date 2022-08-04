@@ -91,7 +91,7 @@ const depositETH = async () => {
   await reportBalances()
   const start = new Date()
 
-  const response = await crossChainMessenger.depositETH(deth)
+  const response = await crossChainMessenger.depositETH(centieth)
   console.log(`Transaction hash (on L1): ${response.hash}`)
   await response.wait()
   console.log("Waiting for status to change to RELAYED")
