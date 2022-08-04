@@ -40,7 +40,7 @@ const setup = async() => {
   const [l1Signer, l2Signer] = await getSigners()
   addr = l1Signer.address
   crossChainMessenger = new optimismSDK.CrossChainMessenger({
-      l1ChainId: 3,   // For Kovan, it's 1 for Mainnet
+      l1ChainId: 5,   // For Kovan, it's 1 for Mainnet
       l2ChainId: 1705003,
       l1SignerOrProvider: l1Signer,
       l2SignerOrProvider: l2Signer
