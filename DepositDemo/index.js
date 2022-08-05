@@ -138,6 +138,8 @@ const main = async () => {
     await setup()
     await depositETH()
 
+    console.log("----------------withdraw eth---------------------------")
+
     await withdrawETH()
 }  // main
 
