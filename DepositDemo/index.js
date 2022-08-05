@@ -104,10 +104,41 @@ const depositETH = async () => {
   console.log(`depositETH took ${(new Date()-start)/1000} seconds\n\n`)
 }
 
+const withdrawETH = async () => {
+    console.log("Withdraw ETH")
+    const start = new Date()
+    await reportBalances()
+
+    const response = await crossChainMessenger.withdrawETH(centieth)
+    console.log(`Transaction hash (on L2): ${response.hash}`)
+    await response.wait()
+
+    console.log("Waiting for status to change to IN_CHALLENGE_PERIOD")
+    console.log(`Time so far ${(new Date()-start)/1000} seconds`)
+    await crossChainMessenger.waitForMessageStatus(response.hash,
+        optimismSDK.MessageStatus.IN_CHALLENGE_PERIOD)
+    console.log("In the challenge period, waiting for status READY_FOR_RELAY")
+    console.log(`Time so far ${(new Date()-start)/1000} seconds`)
+    await crossChainMessenger.waitForMessageStatus(response.hash,
+        optimismSDK.MessageStatus.READY_FOR_RELAY)
+    console.log("Ready for relay, finalizing message now")
+    console.log(`Time so far ${(new Date()-start)/1000} seconds`)
+    await crossChainMessenger.finalizeMessage(response)
+    console.log("Waiting for status to change to RELAYED")
+    console.log(`Time so far ${(new Date()-start)/1000} seconds`)
+    await crossChainMessenger.waitForMessageStatus(response,
+        optimismSDK.MessageStatus.RELAYED)
+    await reportBalances()
+    console.log(`withdrawETH took ${(new Date()-start)/1000} seconds\n\n\n`)
+}     // withdrawETH()
+
+
 
 const main = async () => {
     await setup()
     await depositETH()
+
+    await withdrawETH()
 }  // main
 
 main().then(() => process.exit(0))
