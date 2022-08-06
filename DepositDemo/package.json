@@ -11,6 +11,7 @@
     "hardhat": "^2.4.1"
   },
   "scripts": {
-    "script": "node index.js"
+    "script": "node index.js",
+    "query": "node query.js"
   }
 }
