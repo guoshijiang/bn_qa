@@ -1,3 +1,5 @@
+#! /usr/local/bin/node
+
 // Transfers between L1 and L2 using the Optimism SDK
 
 const ethers = require("ethers")
