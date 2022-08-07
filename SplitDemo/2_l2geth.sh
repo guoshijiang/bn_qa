@@ -12,7 +12,8 @@ function replaceEnv(){
 }
 
 function startL2(){
-  docker run --net bridge -itd -p 8545:8545 -p 8546:8546 --env-file envs/geth.env \
+  docker run --net bridge -itd -p 8545:8545 -p 8546:8546 --env-file envs/geth.env
+  -v /root/ops/ethereum:/root/.ethereum \
   --restart unless-stopped --entrypoint "/usr/local/bin/geth.sh" --name=l2_geth davionlabs/l2geth
 }
 

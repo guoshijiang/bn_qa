@@ -12,6 +12,8 @@
   },
   "scripts": {
     "script": "node index.js",
-    "query": "node query.js"
+    "query": "node query.js",
+    "deposit": "node deposit.js",
+    "withdraw": "node withdraw.js"
   }
 }
