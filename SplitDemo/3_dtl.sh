@@ -16,7 +16,7 @@ function replaceEnv(){
 }
 
 function startDtl(){
-  docker run --net bridge -itd -p 7878:7878 --env-file envs/dtl.env
+  docker run --net bridge -itd -p 7878:7878 --env-file envs/dtl.env \
   -v /root/ops/db:/db \
   --restart unless-stopped --entrypoint "/opt/optimism/packages/data-transport-layer/dtl.sh" \
   --name=dtl davionlabs/data-transport-layer
