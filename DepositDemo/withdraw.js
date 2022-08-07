@@ -59,7 +59,17 @@ const reportBalances = async () => {
     const l1Balance = (await crossChainMessenger.l1Signer.getBalance()).toString().slice(0,-9)
     const l2Balance = (await crossChainMessenger.l2Signer.getBalance()).toString().slice(0,-9)
 
+
+    const l1BalanceWei = (await crossChainMessenger.l1Signer.getBalance()).toString()
+    const l2BalanceWei = (await crossChainMessenger.l2Signer.getBalance()).toString()
+
+
+    const l1BalanceEth = (await crossChainMessenger.l1Signer.getBalance()).toString().slice(0,-18)
+    const l2BalanceEth = (await crossChainMessenger.l2Signer.getBalance()).toString().slice(0,-18)
+
     console.log(`On L1:${l1Balance} Gwei    On L2:${l2Balance} Gwei`)
+    console.log(`On L1:${l1BalanceWei} wei    On L2:${l2BalanceWei} wei`)
+    console.log(`On L1:${l1BalanceEth} eth    On L2:${l2BalanceEth} eth`)
 }    // reportBalances
 
 
