@@ -3,6 +3,7 @@
 This is the scripts for qa env of bn.
 
 ```shell
+source 0_get_project.sh
 source 1_redeployer.sh
 source 2_l2geth.sh
 source 3_dtl.sh
